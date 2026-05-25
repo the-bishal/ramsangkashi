@@ -60,30 +60,30 @@ export const experiences = [
   {
     icon: Sailboat,
     title: 'Boat Ride on the Ganges',
-    image: assets.review,
+    image: assets.ghat5,
     description: 'Feel the serenity as you sail through timeless waters.',
-    imagePosition: 'center 69%',
+    imagePosition: 'center center',
   },
   {
     icon: Route,
     title: 'Heritage Walk',
-    image: assets.hero,
+    image: assets.ghat6,
     description: 'Walk through ancient lanes filled with stories.',
-    imagePosition: 'right center',
+    imagePosition: 'center center',
   },
   {
     icon: Landmark,
     title: 'Temple Trail',
-    image: assets.cloudy,
+    image: assets.temple2,
     description: 'Discover the spiritual heart of ancient temples.',
-    imagePosition: 'right center',
+    imagePosition: 'center center',
   },
   {
     icon: Utensils,
     title: 'Local Culture',
-    image: assets.hero,
+    image: assets.aarti2,
     description: 'Savor local flavors, art, music & the Ganga aarti.',
-    imagePosition: '72% center',
+    imagePosition: 'center center',
   },
 ]
 
