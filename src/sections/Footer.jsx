@@ -25,128 +25,132 @@ const LinkedinIcon = (props) => (
   </svg>
 )
 
+const linkRoutes = {
+  'Home': '/',
+  'About Us': '/about-us',
+  'Explore': '/explore',
+  'Gallery': '/gallery',
+  'Packages': '/packages',
+  'Contact Us': '/contact-us',
+}
+
 const socialLinks = [
   { icon: FacebookIcon, href: 'https://www.facebook.com/profile.php?id=61588479047794', label: 'Facebook' },
   { icon: InstagramIcon, href: 'https://www.instagram.com/ramsangkashi/', label: 'Instagram' },
   { icon: LinkedinIcon, href: 'https://www.linkedin.com/company/ramsangkashi/', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:ramsangkashiyatra@gmail.com', label: 'Email' }
+  { icon: Mail, href: 'mailto:ramsangkashiyatra@gmail.com', label: 'Email' },
 ]
 
 function Footer() {
   return (
-    <footer
-      className="bg-[#2b1b15] px-7 py-9 text-[#ead7bf] sm:px-10 lg:px-16"
-      id="contact-us"
-    >
+    <footer className="bg-[#2b1b15] px-7 py-12 text-[#ead7bf] sm:px-10 lg:px-16" id="contact-us">
       <div className="mx-auto max-w-[1480px]">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_2fr_1.2fr]">
-          <div>
-            <img src={assets.logo} alt="Kashi Varanasi" className="w-32 brightness-150 sepia" />
+
+        {/* ── Main grid ─────────────────────────────────────────────────── */}
+        {/*  Mobile : 2 equal columns                                       */}
+        {/*  Desktop: brand | links | newsletter                            */}
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-[1fr_2fr_1.1fr]">
+
+          {/* ── Brand + Social ─────────────────────────────────────────── */}
+          <div className="col-span-2 lg:col-span-1">
+            <img src={assets.logo} alt="Ram Sang Kashi" className="w-28 brightness-150 sepia" />
             <p className="mt-4 max-w-xs text-sm leading-6 text-[#d7c1a7]">
-              Varanasi is a doorway to the eternal. Come with questions, leave
-              with clarity.
+              Varanasi is a doorway to the eternal. Come with questions, leave with clarity.
             </p>
-            <div className="mt-5 flex gap-3">
-              {socialLinks.map((social) => {
-                const Icon = social.icon
-                return (
-                  <a
-                    aria-label={social.label}
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#7f5b41] transition hover:bg-[#c1844b] hover:text-white"
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    key={social.label}
-                  >
-                    <Icon className="h-4 w-4" strokeWidth={1.5} />
-                  </a>
-                )
-              })}
+            <div className="mt-5 flex flex-wrap gap-2.5">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  aria-label={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#7f5b41] transition hover:bg-[#c1844b] hover:text-white"
+                >
+                  <Icon className="h-4 w-4" strokeWidth={1.5} />
+                </a>
+              ))}
             </div>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-3">
-            {footerGroups.map((group) => (
-              <div key={group.title}>
-                <h3 className="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-[#c1844b]">
-                  {group.title}
-                </h3>
-                <ul className="mt-4 space-y-2">
-                  {group.links.map((link) => {
-                    // Simple path routing mapping helper
-                    let href = '/under-construction'
-                    if (link === 'Home') href = '/'
-                    else if (link === 'About Us') href = '/about-us'
-                    else if (link === 'Explore') href = '/explore'
-                    else if (link === 'Gallery') href = '/gallery'
-                    else if (link === 'Packages') href = '/packages'
-                    else if (link === 'Contact Us') href = '/contact-us'
+          {/* ── Nav links + Contact ────────────────────────────────────── */}
+          {/* On mobile this is a 2-col grid itself; on desktop it expands  */}
+          <div className="col-span-2 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:col-span-1">
 
-                    return (
-                      <li key={link}>
-                        <Link className="text-sm text-[#ead7bf] transition hover:text-white" to={href}>
-                          {link}
-                        </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            ))}
-
-            {/* Get In Touch Contact Details Column */}
+            {/* Company links */}
             <div>
-              <h3 className="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-[#c1844b]">
+              <h3 className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[#c1844b]">
+                Company
+              </h3>
+              <ul className="mt-4 space-y-2.5">
+                {footerGroups[0].links.map((link) => (
+                  <li key={link}>
+                    <Link
+                      to={linkRoutes[link] ?? '/under-construction'}
+                      className="text-sm text-[#ead7bf] transition hover:text-white"
+                    >
+                      {link}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h3 className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[#c1844b]">
+                Services
+              </h3>
+              <ul className="mt-4 space-y-2.5">
+                {footerGroups[1].links.map((link) => (
+                  <li key={link} className="text-sm text-[#d7c1a7] leading-5">
+                    {link}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Get In Touch */}
+            <div className="col-span-2 sm:col-span-1">
+              <h3 className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[#c1844b]">
                 Get In Touch
               </h3>
-              <ul className="mt-4 space-y-3.5 text-sm text-[#ead7bf]">
-                <li className="leading-6 text-[#d7c1a7]">
-                  Samneghat, Lanka, Varanasi, Uttar Pradesh, 221004
+              <ul className="mt-4 space-y-3 text-sm text-[#d7c1a7]">
+                <li className="leading-6">
+                  Samneghat, Lanka, Varanasi,<br />Uttar Pradesh, 221004
                 </li>
                 <li>
-                  <a
-                    href="mailto:ramsangkashiyatra@gmail.com"
-                    className="transition hover:text-white"
-                  >
+                  <a href="mailto:ramsangkashiyatra@gmail.com" className="transition hover:text-white break-all">
                     ramsangkashiyatra@gmail.com
                   </a>
                 </li>
-                <li className="flex flex-col gap-1.5">
-                  <a
-                    href="tel:+919580446907"
-                    className="transition hover:text-white"
-                  >
-                    +91 95804 46907
-                  </a>
-                  <a
-                    href="tel:+919519517559"
-                    className="transition hover:text-white"
-                  >
-                    +91 95195 17559
-                  </a>
+                <li className="flex flex-col gap-1">
+                  <a href="tel:+919580446907" className="transition hover:text-white">+91 95804 46907</a>
+                  <a href="tel:+919519517559" className="transition hover:text-white">+91 95195 17559</a>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="border-[#5b3f2d] lg:border-l lg:pl-9">
-            <h3 className="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-[#c1844b]">
+          {/* ── Newsletter ─────────────────────────────────────────────── */}
+          <div className="col-span-2 lg:col-span-1 lg:border-l lg:border-[#5b3f2d] lg:pl-9">
+            <h3 className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[#c1844b]">
               Newsletter
             </h3>
             <p className="mt-4 text-sm leading-6 text-[#d7c1a7]">
-              Stay updated with the latest stories & travel guides.
+              Stay updated with the latest stories &amp; travel guides.
             </p>
             <form className="mt-5 flex overflow-hidden rounded-[3px] border border-[#76543b]">
               <input
                 aria-label="Email address"
-                className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-[#a98b70]"
-                placeholder="Enter your email"
                 type="email"
+                placeholder="Enter your email"
+                className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-[#a98b70]"
               />
               <button
                 aria-label="Subscribe"
-                className="inline-flex w-14 items-center justify-center bg-[#bd8349] text-white transition hover:bg-[#cf9559]"
                 type="submit"
+                className="inline-flex w-12 items-center justify-center bg-[#bd8349] text-white transition hover:bg-[#cf9559]"
               >
                 <ArrowUpRight className="h-4 w-4" />
               </button>
@@ -154,18 +158,19 @@ function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col justify-between gap-4 border-t border-[#5b3f2d] pt-5 text-xs text-[#b99d82] sm:flex-row">
+        {/* ── Bottom bar ──────────────────────────────────────────────── */}
+        <div className="mt-10 flex flex-col justify-between gap-3 border-t border-[#5b3f2d] pt-6 text-xs text-[#b99d82] sm:flex-row sm:items-center">
           <p>© 2026 ramsangkashi.in. All Rights Reserved.</p>
-          <div className="flex flex-wrap gap-6">
-            <Link to="/under-construction">Privacy Policy</Link>
-            <Link to="/under-construction">Terms of Use</Link>
-            <Link to="/under-construction">Sitemap</Link>
+          <div className="flex flex-wrap gap-5">
+            <Link to="/under-construction" className="transition hover:text-white">Privacy Policy</Link>
+            <Link to="/under-construction" className="transition hover:text-white">Terms of Use</Link>
+            <Link to="/under-construction" className="transition hover:text-white">Sitemap</Link>
           </div>
         </div>
+
       </div>
     </footer>
   )
 }
 
 export default Footer
-
