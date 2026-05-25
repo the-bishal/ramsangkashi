@@ -55,7 +55,6 @@ temp/
 *.db
 
 # MongoDB local data
-data/
 dump/
 
 # Uploads
